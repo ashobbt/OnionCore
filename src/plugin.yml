@@ -3,3 +3,8 @@ version: 1.0
 author: Chase Witzansky
 main: xyz.chasew.jacobsmmo.JacobsMMO
 api-version: 1.13
+
+commands:
+  edititem:
+    description: Edit an item's properties (the one you're holding)
+    usage: /edititem <property> <value> [change]
