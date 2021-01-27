@@ -9,5 +9,5 @@ commands:
     description: Edit an item's properties (the one you're holding)
     usage: /edititem <property> <value> [change]
   backifnear:
-    description: Push player back if they're close to the block
-    usage: /backifnear <radius>
+    description: Push player back if they're close to the block. Radius is the radius of closeness and back is the direction to go back (-x, -y, -z, +x, +y, +z)
+    usage: /backifnear <radius> <xback> <yback> <zback>
