@@ -1,0 +1,5 @@
+name: JacobsMMO
+version: 1.0
+author: Chase Witzansky
+main: xyz.chasew.chasescore.JacobsMMO
+api-version: 1.13
