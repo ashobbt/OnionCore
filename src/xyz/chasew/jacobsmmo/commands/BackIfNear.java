@@ -1,10 +1,7 @@
 package xyz.chasew.jacobsmmo.commands;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
-import org.bukkit.block.CommandBlock;
 import org.bukkit.command.BlockCommandSender;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -12,16 +9,23 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
-
+//Location expLoc = new Location(player.getWorld(), x, y + 1, z, player.getLocation().getYaw(), player.getLocation().getPitch());
 import java.util.Collection;
 
 
 public class BackIfNear implements CommandExecutor {
-    public void pushBack(int x, int y, int z, Player player) {
-        Vector pushBackVector = player.getLocation().getDirection().normalize();
-        player.setVelocity(player.getVelocity().add(pushBackVector.multiply(-2)));
+    public static void pushAwayFrom(Player player, Location pushFromPoint, Location pushToPoint) {
+        Vector pushToVector = pushToPoint.toVector(); // VS
+        Vector pushFromVector = pushFromPoint.toVector(); // VP
 
+        Vector pushDirection = pushToVector.subtract(pushFromVector);
+
+        pushDirection.normalize();
+        pushDirection.multiply(2.5);
+
+        player.setVelocity(pushDirection);
     }
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof BlockCommandSender)) {
@@ -29,10 +33,10 @@ public class BackIfNear implements CommandExecutor {
             return true;
         }
         BlockCommandSender blockSender = (BlockCommandSender) sender;
-        if(args.length > 2) {
+        if(args.length < 3) {
             return false;
         }
-        double radius = Double.parseDouble(args[1]);
+        double radius = Double.parseDouble(args[0]);
         Block commandBlock = blockSender.getBlock();
         Location blockMiddle = commandBlock.getLocation().add(0.5, 0.5, 0.5);
 
@@ -41,7 +45,31 @@ public class BackIfNear implements CommandExecutor {
         for (Entity entity : nearbyEntities) {
             if (entity instanceof Player) {
                 Player hitPlayer = (Player) entity;
-                pushBack(1, 2, 3, hitPlayer);
+                Location pushToPoint = hitPlayer.getLocation();
+                Integer blockBack = Integer.parseInt(args[2]);
+                switch(args[1]) {
+                    case "x":
+                        pushToPoint = pushToPoint.add(blockBack, 0, 0);
+                        break;
+                    case "y":
+                        pushToPoint = pushToPoint.add(0, blockBack, 0);
+                        break;
+                    case "z":
+                        pushToPoint = pushToPoint.add(0, 0, blockBack);
+                        break;
+                    case "-x":
+                        pushToPoint = pushToPoint.subtract(blockBack, 0, 0);
+                        break;
+                    case "-y":
+                        pushToPoint = pushToPoint.subtract(0, blockBack, 0);
+                        break;
+                    case "-z":
+                        pushToPoint = pushToPoint.subtract(0, 0, blockBack);
+                        break;
+                    default:
+                        return false;
+                }
+                pushAwayFrom(hitPlayer, blockMiddle, pushToPoint);
             }
         }
         return true;

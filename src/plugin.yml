@@ -10,4 +10,4 @@ commands:
     usage: /edititem <property> <value> [change]
   backifnear:
     description: Push player back if they're close to the block. Radius is the radius of closeness and back is the direction to go back (-x, -y, -z, +x, +y, +z)
-    usage: /backifnear <radius> <xback> <yback> <zback>
+    usage: /backifnear <radius> <backdir> <blockblack>
