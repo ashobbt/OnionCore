@@ -17,7 +17,7 @@ public class BackIfNear implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof BlockCommandSender)) {
-            sender.sendMessage("Only command blocks can execute this command.");
+            sender.sendMessage("Only command blocks can execute this command!");
             return true;
         }
         BlockCommandSender blockSender = (BlockCommandSender) sender;
