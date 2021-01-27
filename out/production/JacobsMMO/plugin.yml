@@ -8,3 +8,6 @@ commands:
   edititem:
     description: Edit an item's properties (the one you're holding)
     usage: /edititem <property> <value> [change]
+  backifnear:
+    description: Push player back if they're close to the block
+    usage: /backifnear <radius>
