@@ -23,7 +23,7 @@ public class BoomStickHandler implements Listener {
         if(player.getInventory().getItemInMainHand().equals(BoomStickRecipe.item)) {
             player.sendMessage(ChatColor.LIGHT_PURPLE + "BOOM!");
             player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 175, 255));
-            BackIfNear.pushAwayFrom(player, player.getLocation(), player.getLocation().add(0, 20, 0));
+            BackIfNear.pushAwayFrom(player, player.getLocation(), player.getLocation().add(0, 20, 0), 2.5);
         }
 
     }

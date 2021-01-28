@@ -14,14 +14,14 @@ import java.util.Collection;
 
 
 public class BackIfNear implements CommandExecutor {
-    public static void pushAwayFrom(Player player, Location pushFromPoint, Location pushToPoint) {
+    public static void pushAwayFrom(Player player, Location pushFromPoint, Location pushToPoint, double pushMultiplier) {
         Vector pushToVector = pushToPoint.toVector(); // VS
         Vector pushFromVector = pushFromPoint.toVector(); // VP
 
         Vector pushDirection = pushToVector.subtract(pushFromVector);
 
         pushDirection.normalize();
-        pushDirection.multiply(2.5);
+        pushDirection.multiply(pushMultiplier);
 
         player.setVelocity(pushDirection);
     }
@@ -33,7 +33,7 @@ public class BackIfNear implements CommandExecutor {
             return true;
         }
         BlockCommandSender blockSender = (BlockCommandSender) sender;
-        if(args.length < 3) {
+        if(args.length < 4) {
             return false;
         }
         double radius = Double.parseDouble(args[0]);
@@ -47,6 +47,7 @@ public class BackIfNear implements CommandExecutor {
                 Player hitPlayer = (Player) entity;
                 Location pushToPoint = hitPlayer.getLocation();
                 Integer blockBack = Integer.parseInt(args[2]);
+                double pushMultiplier = Double.parseDouble(args[3]);
                 switch(args[1]) {
                     case "x":
                         pushToPoint = pushToPoint.add(blockBack, 0, 0);
@@ -69,7 +70,7 @@ public class BackIfNear implements CommandExecutor {
                     default:
                         return false;
                 }
-                pushAwayFrom(hitPlayer, blockMiddle, pushToPoint);
+                pushAwayFrom(hitPlayer, blockMiddle, pushToPoint, pushMultiplier);
             }
         }
         return true;
