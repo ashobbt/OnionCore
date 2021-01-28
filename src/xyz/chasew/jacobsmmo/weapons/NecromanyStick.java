@@ -42,12 +42,21 @@ public class NecromanyStick extends WeaponAbstract{
             if(zombieSpawnCount % 2 == 0) {
                 //System.out.println("E");
                 loc = player.getLocation().subtract(2, 0, 0);
+                if(zombieSpawnCount > 5) {
+                    loc = player.getLocation().subtract(2.5, 0, 0);
+                }
+
             } else {
-                loc = player.getLocation().add(2, 0, 2);
+                loc = player.getLocation().add(2, 0, 0);
                 //System.out.println("O");
+                if(zombieSpawnCount > 5) {
+                    loc = player.getLocation().add(2.5, 0, 0);
+                }
             }
             LivingEntity spawnedZombie = (LivingEntity) loc.getWorld().spawnEntity(loc, EntityType.ZOMBIE);
-            spawnedZombie.getEquipment().setHelmet(new ItemStack(Material.GLASS));
+            spawnedZombie.getEquipment().setHelmet(new ItemStack(Material.LEATHER_HELMET));
+            spawnedZombie.getEquipment().setItemInMainHand(new ItemStack(Material.WOODEN_SWORD));
+            spawnedZombie.getEquipment().setItemInOffHand(new ItemStack(Material.SHIELD));
             zombieSpawnCount= zombieSpawnCount - 1;
         }
     }
