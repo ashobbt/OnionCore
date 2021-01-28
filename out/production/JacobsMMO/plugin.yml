@@ -8,6 +8,7 @@ commands:
   edititem:
     description: Edit an item's properties (the one you're holding)
     usage: /edititem <property> <value> [change]
+    permission: minecraft.op
   backifnear:
     description: Push player back if they're close to the block. Radius is the radius of closeness and back is the direction to go back (-x, -y, -z, +x, +y, +z)
     usage: /backifnear <radius> <backdir> <blockblack> <force>

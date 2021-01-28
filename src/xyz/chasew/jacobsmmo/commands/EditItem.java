@@ -17,6 +17,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 public class EditItem implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -67,27 +68,18 @@ public class EditItem implements CommandExecutor {
                         return false;
                     }
                 case "name":
-                    String fullCommand = String.join(" ", args);
-                    String searchPatternString = "(\".*\") (\".*\") (\".*\")";
+                    //Match ALL of the quoted strings
+                    Pattern quoteMatchPatter = Pattern.compile("(\".*\")");
+                    //Match them
+                    Matcher matchedMsg = quoteMatchPatter.matcher(String.join(" ", args));
 
-                    Pattern searchPattern = Pattern.compile(searchPatternString);
-                    Matcher matcher = searchPattern.matcher(fullCommand);
-
-                    if(!matcher.find()) {
-                        playerSender.sendMessage("Hey you need a new item name in between quotes! (NOF)");
+                    if(!matchedMsg.find()) {
+                        playerSender.sendMessage("Include the new name within double quotes \"like this\"");
                         return true;
                     }
+                    String newName = matchedMsg.group().replace("\"", "");
 
-                    String newName = matcher.group(0).replace("\"", "").split(" ")[0];
-                    if(newName.equals("")) {
-                        playerSender.sendMessage("Hey you need a new item name in between quotes! (NOE)");
-                        return true;
-                    }
                     toEditMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', newName));
-                    List<String> potentialLore = Arrays.asList(ChatColor.translateAlternateColorCodes('&', matcher.group(2).replace("\"", "")), ChatColor.translateAlternateColorCodes('&', matcher.group(3).replace("\"", "")));
-                    if(matcher.group(1) != null) {
-                        toEditMeta.setLore(potentialLore);
-                    }
                     toEdit.setItemMeta(toEditMeta);
                     playerSender.updateInventory();
                     break;
