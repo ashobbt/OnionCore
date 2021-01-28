@@ -20,7 +20,6 @@ public class JacobsMMO extends JavaPlugin {
         saveDefaultConfig();
         getLogger().info("\n----\nJacob's MORPG Plugin is enabled\n----");
         getServer().getPluginManager().registerEvents(new PlayerJoin(this), this);
-        getServer().getPluginManager().registerEvents(new BoomStickHandler(), this);
         getServer().getPluginManager().registerEvents(new WeaponsHandlers(this), this);
         Bukkit.addRecipe(new BoomStickRecipe().getRec(this));
         this.getCommand("edititem").setExecutor(new EditItem());

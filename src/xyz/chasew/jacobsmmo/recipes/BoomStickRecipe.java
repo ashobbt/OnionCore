@@ -21,7 +21,7 @@ public class BoomStickRecipe {
         // We will initialise the next variable after changing the properties of the sword
 
         // This sets the name of the item.
-        meta.setDisplayName(ChatColor.GREEN + "BoomStick");
+        meta.setDisplayName(ChatColor.BOLD + "Boom Stick");
 
         // Set the meta of the sword to the edited meta.
         item.setItemMeta(meta);
