@@ -10,6 +10,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import xyz.chasew.jacobsmmo.managers.CooldownManager;
 
 import java.util.concurrent.TimeUnit;
@@ -32,7 +34,7 @@ public class NecromanyStick extends WeaponAbstract{
             player.sendMessage(ChatColor.GREEN + "Used item!");
             cooldownManager.setCooldown(player.getUniqueId(), System.currentTimeMillis());
         } else {
-            player.sendMessage(ChatColor.RED + "There's a " + Long.toString(weaponUseCooldown) + " second cooldown on this!");
+            player.sendMessage(ChatColor.RED + "There's a " + Long.toString(cooldownManager.getCooldownLeft(player.getUniqueId())) + " second cooldown on this!");
             return;
         }
         Integer zombieSpawnCount = 10;
@@ -57,6 +59,7 @@ public class NecromanyStick extends WeaponAbstract{
             spawnedZombie.getEquipment().setHelmet(new ItemStack(Material.LEATHER_HELMET));
             spawnedZombie.getEquipment().setItemInMainHand(new ItemStack(Material.WOODEN_SWORD));
             spawnedZombie.getEquipment().setItemInOffHand(new ItemStack(Material.SHIELD));
+            spawnedZombie.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 75, 100));
             zombieSpawnCount= zombieSpawnCount - 1;
         }
     }

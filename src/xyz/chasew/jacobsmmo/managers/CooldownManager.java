@@ -22,19 +22,12 @@ public class CooldownManager {
             cooldowns.put(player, time);
         }
     }
-    /*
-    public boolean getCooldownLeft(UUID player) {
+
+    public long getCooldownLeft(UUID player) {
         long timeLeft = System.currentTimeMillis() - cooldowns.getOrDefault(player, 0L);
-        if(TimeUnit.MILLISECONDS.toSeconds(timeLeft) >= DEFAULT_COOLDOWN){
-            //Passed
-            setCooldown(player, System.currentTimeMillis());
-            return true;
-        } else{
-            //Failed
-            return false;
-        }
+        return timeLeft;
     }
-     */
+
 
     public boolean isOnCoolDown(UUID playerID, long passedCooldown) {
         Long timeStamp = cooldowns.get(playerID);

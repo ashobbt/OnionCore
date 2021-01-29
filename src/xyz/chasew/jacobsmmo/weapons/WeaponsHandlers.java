@@ -40,6 +40,7 @@ public class WeaponsHandlers implements Listener {
         Action eventAction = interactEvent.getAction();
         registerWeapon(NecromanyStick.weaponNameWithFormat, new NecromanyStick(thisPlugin, cooldownManager));
         registerWeapon(BoomStick.weaponNameWithFormat, new BoomStick(thisPlugin, cooldownManager));
+        registerWeapon(FireballStick.weaponNameWithFormat, new FireballStick(thisPlugin, cooldownManager));
         for(String i: weaponRegister.keySet()) {
             if(interactEvent.getItem().getItemMeta().getDisplayName().equals(i)) {
                 Player p = interactEvent.getPlayer();
