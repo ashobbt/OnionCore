@@ -17,24 +17,24 @@ import xyz.chasew.jacobsmmo.managers.CooldownManager;
 import java.util.concurrent.TimeUnit;
 
 public class NecromanyStick extends WeaponAbstract{
-    public static String weaponNameWithFormat = ChatColor.BOLD + "Necromancy Stick";
+    public static String weaponNameWithFormat = "necromancy_wand";
     public static long weaponUseCooldown = 10;
-    public Plugin thisPlugin;
 
     CooldownManager cooldownManager;
 
     public NecromanyStick(Plugin thisPlugin, CooldownManager cooldownManager) {
         this.thisPlugin = thisPlugin;
         this.cooldownManager = cooldownManager;
+        this.weaponUseType = WeaponUseType.RIGHT_CLICK;
     }
 
 
     public void weaponExecute(Player player, PlayerInteractEvent interactEvent) {
-        if(!cooldownManager.isOnCoolDown(player.getUniqueId(), weaponUseCooldown)) {
+        if(!cooldownManager.isOnMainCoolDown(player.getUniqueId(), weaponUseCooldown)) {
             player.sendMessage(ChatColor.GREEN + "Used item!");
-            cooldownManager.setCooldown(player.getUniqueId(), System.currentTimeMillis());
+            cooldownManager.setMainCooldown(player.getUniqueId(), System.currentTimeMillis());
         } else {
-            player.sendMessage(ChatColor.RED + "There's a " + Long.toString(cooldownManager.getCooldownLeft(player.getUniqueId())) + " second cooldown on this!");
+            player.sendMessage(ChatColor.RED + "There's a " + Long.toString(weaponUseCooldown - cooldownManager.getMainCooldownLeft(player.getUniqueId())) + " second cooldown on this!");
             return;
         }
         Integer zombieSpawnCount = 10;

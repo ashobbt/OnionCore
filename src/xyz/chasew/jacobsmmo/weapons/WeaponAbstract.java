@@ -8,8 +8,11 @@ import org.bukkit.scheduler.BukkitRunnable;
 import xyz.chasew.jacobsmmo.managers.CooldownManager;
 
 public abstract class WeaponAbstract {
-    public String weaponNameWithFormat;
-    public long weaponUseCooldown;
+    public static String weaponNameWithFormat;
+    public static long weaponUseCooldown;
+    public static long secondaryWeaponUseCooldown;
+    public WeaponUseType weaponUseType;
+    public Plugin thisPlugin;
 
     /*
     public boolean checkCool(Player player, Plugin thisPlugin, Integer weaponUseCooldown) {

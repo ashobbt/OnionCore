@@ -1,6 +1,5 @@
 package xyz.chasew.jacobsmmo.weapons;
 
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventException;
 import org.bukkit.event.EventHandler;
@@ -8,14 +7,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
-import org.bukkit.scheduler.BukkitRunnable;
-import xyz.chasew.jacobsmmo.commands.BackIfNear;
+import xyz.chasew.jacobsmmo.commands.GiveSpecial;
 import xyz.chasew.jacobsmmo.managers.CooldownManager;
-import xyz.chasew.jacobsmmo.recipes.BoomStickRecipe;
+import xyz.chasew.jacobsmmo.utilities.Utilities;
 
-import java.lang.reflect.Method;
 import java.util.HashMap;
 
 public class WeaponsHandlers implements Listener {
@@ -40,13 +35,37 @@ public class WeaponsHandlers implements Listener {
         Action eventAction = interactEvent.getAction();
         registerWeapon(NecromanyStick.weaponNameWithFormat, new NecromanyStick(thisPlugin, cooldownManager));
         registerWeapon(BoomStick.weaponNameWithFormat, new BoomStick(thisPlugin, cooldownManager));
-        registerWeapon(FireballStick.weaponNameWithFormat, new FireballStick(thisPlugin, cooldownManager));
-        for(String i: weaponRegister.keySet()) {
-            if(interactEvent.getItem().getItemMeta().getDisplayName().equals(i)) {
-                Player p = interactEvent.getPlayer();
-                WeaponAbstract weaponGot = weaponRegister.get(i);
-                weaponGot.weaponExecute(p, interactEvent);
+        registerWeapon(FireballWand.weaponNameWithFormat, new FireballWand(thisPlugin, cooldownManager));
+        registerWeapon(ArrowRain.weaponNameWithFormat, new ArrowRain(thisPlugin, cooldownManager));
+        try {
+            for(String i: weaponRegister.keySet()) {
+                if(
+                        interactEvent.getItem().getItemMeta().getPersistentDataContainer().get(Utilities.weaponNameAttrib(thisPlugin), Utilities.stringType).equals(i)
+                ) {
+                    Player p = interactEvent.getPlayer();
+                    WeaponAbstract weaponGot = weaponRegister.get(i);
+                    switch(weaponGot.weaponUseType) {
+                        case ANY:
+                            weaponGot.weaponExecute(p, interactEvent);
+                            break;
+                        case LEFT_CLICK:
+                            if(eventAction == Action.LEFT_CLICK_AIR || eventAction == Action.LEFT_CLICK_BLOCK) {
+                                weaponGot.weaponExecute(p, interactEvent);
+                            }
+                            break;
+                        case RIGHT_CLICK:
+                            if(eventAction == Action.RIGHT_CLICK_AIR || eventAction == Action.RIGHT_CLICK_BLOCK) {
+                                weaponGot.weaponExecute(p, interactEvent);
+                            }
+                            break;
+                    }
+                    interactEvent.setCancelled(true);
+                }
+
+
             }
+        } catch (Exception e) {
+            return;
         }
     }
 }

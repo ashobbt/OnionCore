@@ -12,3 +12,7 @@ commands:
   backifnear:
     description: Push player back if they're close to the block. Radius is the radius of closeness and back is the direction to go back (-x, -y, -z, +x, +y, +z)
     usage: /backifnear <radius> <backdir> <blockblack> <force>
+  givespecial:
+    description: Give one of the weapons/special items
+    usage: /givespecial <playername> <item>
+    permission: minecraft.op
