@@ -1,5 +1,5 @@
 # JacobsMMO
-General plugin for OKG, download build in out/artifcacts
+General plugin for OKG, download build in out/artifacts
 ##  Commands
 *edititem*  
     Edit an item's properties (the one you're holding)  
