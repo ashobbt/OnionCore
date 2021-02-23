@@ -2,18 +2,15 @@ package xyz.chasew.jacobsmmo;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
-import xyz.chasew.jacobsmmo.commands.BackIfNear;
-import xyz.chasew.jacobsmmo.commands.EditItem;
-import xyz.chasew.jacobsmmo.commands.GiveSpecial;
+import xyz.chasew.jacobsmmo.commands.*;
 import xyz.chasew.jacobsmmo.filesystem.PluginFileSystemHandler;
-import xyz.chasew.jacobsmmo.handlers.BoomStickHandler;
 import xyz.chasew.jacobsmmo.handlers.PlayerJoin;
 import xyz.chasew.jacobsmmo.recipes.BoomStickRecipe;
+import xyz.chasew.jacobsmmo.specialitems.GiveSpecialCommand;
+import xyz.chasew.jacobsmmo.specialitems.SpecialItem;
+import xyz.chasew.jacobsmmo.specialitems.SpecialItemEventHandler;
+import xyz.chasew.jacobsmmo.specialitems.SpecialItemsContainer;
 import xyz.chasew.jacobsmmo.weapons.WeaponsHandlers;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
 
 public class JacobsMMO extends JavaPlugin {
     @Override
@@ -24,7 +21,13 @@ public class JacobsMMO extends JavaPlugin {
         Bukkit.addRecipe(new BoomStickRecipe().getRec(this));
         this.getCommand("edititem").setExecutor(new EditItem());
         this.getCommand("backifnear").setExecutor(new BackIfNear());
-        this.getCommand("givespecial").setExecutor(new GiveSpecial(this));
+        this.getCommand("givespecialweapon").setExecutor(new GiveSpecialWeapon(this));
+        this.getCommand("specialeffect").setExecutor(new SpecialEffect(this));
+        this.getCommand("rotateallentities").setExecutor(new RotateAllEntities());
+        SpecialItemsContainer specialItemsContainer = new SpecialItemsContainer(this);
+        specialItemsContainer.initItems();
+        this.getCommand("givespecial").setExecutor(new GiveSpecialCommand(specialItemsContainer));
+        getServer().getPluginManager().registerEvents(new SpecialItemEventHandler(specialItemsContainer), this);
         PluginFileSystemHandler.enableHandler(getDataFolder());
     }
 

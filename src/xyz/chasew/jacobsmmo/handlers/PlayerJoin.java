@@ -20,5 +20,6 @@ public class PlayerJoin implements Listener {
         Random rand = new Random();
         String randJoinMsg = joinMessages.get(rand.nextInt(joinMessages.size()));
         joinEvent.setJoinMessage(ChatColor.GREEN + joinEvent.getPlayer().getName() + ChatColor.DARK_GREEN + " joined the server, " + randJoinMsg);
+        joinEvent.getPlayer().sendTitle(ChatColor.BOLD + "" + ChatColor.DARK_PURPLE + "Welcome!", ChatColor.BOLD + "Good to see you, " + joinEvent.getPlayer().getName(), 10, 70, 20);
     }
 }

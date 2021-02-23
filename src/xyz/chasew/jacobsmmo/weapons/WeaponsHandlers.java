@@ -1,13 +1,11 @@
 package xyz.chasew.jacobsmmo.weapons;
 
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventException;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.plugin.Plugin;
-import xyz.chasew.jacobsmmo.commands.GiveSpecial;
 import xyz.chasew.jacobsmmo.managers.CooldownManager;
 import xyz.chasew.jacobsmmo.utilities.Utilities;
 

@@ -7,4 +7,5 @@ import org.bukkit.plugin.Plugin;
 public class Utilities {
     public static PersistentDataType<String, String> stringType = PersistentDataType.STRING;
     public static NamespacedKey weaponNameAttrib(Plugin p) { return new NamespacedKey(p, "weapon_name"); }
+    public static NamespacedKey spleefSnowballAttrib(Plugin p ) { return new NamespacedKey(p, "spleef_snowball"); }
 }
