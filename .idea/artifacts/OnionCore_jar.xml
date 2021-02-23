@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="OnionCore:jar">
+    <output-path>$PROJECT_DIR$/builtJar</output-path>
+    <root id="archive" name="JacobsMMO.jar">
+      <element id="module-output" name="JacobsMMO" />
+      <element id="extracted-dir" path="$USER_HOME$/Desktop/serverRunner/spigot.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/spigot-api-1.16.5-R0.1-20210123.012316-5.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
