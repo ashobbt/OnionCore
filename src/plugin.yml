@@ -19,9 +19,12 @@ commands:
   specialeffect:
     description: Effect presets
     usage: /specialeffect <preset> <rootx> <rooty> <rootz>
+    permission: minecraft.op
   rotateallentities:
     description: Command to rotate all entities with specified tag (Loop it)
     usage: /rotateallentities <tagname> <amountYaw> <amountPitch>
+    permission: minecraft.op
   givespecial:
     description: Give special item
     usage: /givespecial <selector> <item> <amount>
+    permission: minecraft.op
