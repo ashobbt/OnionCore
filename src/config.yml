@@ -1,5 +1,5 @@
-join-messages: ["swords up!", "call in the cavalry!", "seal the blast doors!"]
+join-messages: ["ready to play!?", "glad you're here!", "welcome to the party!"]
 #Naming convention, just add a comma and a new string in between quotes. IE change it from
-#join-messages: ["swords up!", "call in the cavalry!", "seal the blast doors!"]
+#join-messages: ["ready to play!?", "glad you're here!", "welcome to the party!"]
 #and add a new value "batten the hatches!"
-#join-messages: ["swords up!", "call in the cavalry!", "seal the blast doors!", "batten the hatches!"]
+#join-messages: ["ready to play!?", "glad you're here!", "welcome to the party!"]
