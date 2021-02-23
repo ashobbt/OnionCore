@@ -1,4 +1,4 @@
-# JacobsMMO
+# OnionCore
 General plugin for OKG, download build in out/artifacts
 ##  Commands
 *edititem*  
